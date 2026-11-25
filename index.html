@@ -51,7 +51,7 @@
     position: absolute; left: 50%; top: calc(env(safe-area-inset-top) + 22px);
     transform: translateX(-50%);
     width: min(150px, 42vw); aspect-ratio: 451 / 86; /* same proportions as a 451x86 logo */
-    border: 1.5px dashed rgba(255,255,255,.7); border-radius: 6px;
+    border: none;
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 2px;
   }
@@ -175,7 +175,7 @@
 <header class="app-header">
   <!-- Replace this placeholder with your own logo, e.g. <img src="logo.svg" alt="Nombre de la app" class="logo-placeholder"> -->
   <div>
-    <img src="res/LogoMA.png" alt="Mi Argentina">
+    <img src="res/LogoMA.png" alt="Mi Argentina" class="logo-placeholder">
   </div>
   <div class="bar">
     <button class="menu-btn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
