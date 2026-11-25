@@ -55,6 +55,11 @@
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 2px;
   }
+   .greeting {
+    position: absolute; left: 0; right: 0; top: calc(env(safe-area-inset-top) + 62px);
+    text-align: center; color: #fff;
+    font-size: 17px; font-weight: 700; letter-spacing: .2px;
+  }
   .menu-btn {
     width: 40px; height: 40px; margin: 4px 0 0 -8px;
     background: none; border: none; cursor: pointer;
@@ -177,6 +182,7 @@
   <div>
     <img src="res/LogoMA.png" alt="Mi Argentina" class="logo-placeholder">
   </div>
+  <p class="greeting">¡Hola, Martín!</p>
   <div class="bar">
     <button class="menu-btn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
     <a href="#" class="avatar" aria-label="Mi perfil">
