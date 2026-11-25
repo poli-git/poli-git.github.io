@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#3830c2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Inicio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,13 +28,38 @@
     color: var(--text);
     max-width: 480px;
     margin: 0 auto;
-    padding-top: env(safe-area-inset-top);
     padding-bottom: calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
   }
   svg.icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Header ---------- */
+  .app-header {
+    background: #3830c2;
+    padding: env(safe-area-inset-top) 0 0;
+    height: calc(96px + env(safe-area-inset-top));
+    position: relative;
+  }
+  .app-header .bar {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 10px 14px 0 16px;
+  }
+  .menu-btn {
+    width: 40px; height: 40px; margin: 4px 0 0 -8px;
+    background: none; border: none; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5.5px;
+  }
+  .menu-btn span { display: block; width: 25px; height: 2.5px; background: #fff; border-radius: 2px; }
+  .avatar { position: relative; width: 34px; height: 34px; display: block; }
+  .avatar .badge {
+    position: absolute; left: -5px; bottom: -2px;
+    width: 14px; height: 14px; border-radius: 50%; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* turnos card overlaps the bottom of the purple header */
+  .app-header + main .turno-card { margin-top: -20px; position: relative; }
 
   /* ---------- Turnos card ---------- */
   .turno-card {
@@ -137,6 +162,23 @@
     <symbol id="i-kids" viewBox="0 0 24 24"><circle cx="7" cy="11" r="2.6"/><path d="M2.5 21c0-3 2-5.2 4.5-5.2s4.5 2.2 4.5 5.2"/><circle cx="16.5" cy="6.5" r="3"/><path d="M11.5 15c.6-3.2 2.6-5 5-5 2.8 0 5 2.4 5 6"/></symbol>
   </defs>
 </svg>
+
+<header class="app-header">
+  <div class="bar">
+    <button class="menu-btn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <a href="#" class="avatar" aria-label="Mi perfil">
+      <svg width="34" height="34" viewBox="0 0 34 34">
+        <defs><clipPath id="av"><circle cx="17" cy="17" r="17"/></clipPath></defs>
+        <circle cx="17" cy="17" r="17" fill="#cfcfcf"/>
+        <g clip-path="url(#av)" fill="#747474">
+          <path d="M17 6c3 0 4.6 2.2 4.6 5.2 0 3.6-1.8 7.2-4.6 7.2s-4.6-3.6-4.6-7.2C12.4 8.2 14 6 17 6Z"/>
+          <path d="M3 34c1-6 5-9 10-10.5l4 2 4-2C26 25 30 28 31 34Z"/>
+        </g>
+      </svg>
+      <span class="badge"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M1.5 5.2 4 7.6 8.6 2.4" fill="none" stroke="#6aa6dc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+</header>
 
 <main>
   <div class="turno-card">
@@ -250,4 +292,3 @@
 </script>
 </body>
 </html>
-
