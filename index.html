@@ -1,93 +1,214 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Argentina</title>
-    <link rel="shortcut icon" href="res/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="stylesheets/navbar.css">
-    <link rel="stylesheet" href="stylesheets/index.css">
-    <link rel="stylesheet" href="stylesheets/footer.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #3a38bd;
+    --text: #2b2b2b;
+    --bg: #efefef;
+    --sidebar-bg: #f7f7f7;
+    --card: #ffffff;
+    --border: #d9d9d9;
+    --pink-card: #e8cbcf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Encode Sans", system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+  }
+  svg.icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    width: 205px;
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    border-right: 1px solid #e2e2e2;
+    padding: 14px 12px;
+  }
+  .sidebar nav ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .sidebar a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 15px;
+    border-radius: 999px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    height: 32px;
+  }
+  .sidebar a span { color: #232349; }
+  .sidebar a svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .sidebar a:hover { background: #e9e9f7; }
+  .sidebar a.active { background: var(--primary); color: #fff; }
+  .sidebar a.active span { color: #fff; }
+
+  /* ---------- Main ---------- */
+  main { flex: 1; padding: 22px 30px 40px; }
+  .greeting { text-align: center; margin-bottom: 26px; }
+  .greeting h1 { font-size: 26px; font-weight: 700; margin-bottom: 26px; }
+  .greeting p { font-size: 12.5px; font-weight: 500; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 434px) minmax(0, 434px);
+    gap: 26px;
+    justify-content: center;
+    margin-left: 160px; /* matches the off-center layout in the screenshot */
+  }
+  @media (max-width: 1150px) { .layout { margin-left: 0; } }
+  @media (max-width: 900px)  { .layout { grid-template-columns: 1fr; } }
+
+  /* Turnos card */
+  .turno-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    height: 96px;
+    display: flex; align-items: center; gap: 36px;
+    padding: 0 25px;
+  }
+  .turno-card .big-icon { width: 42px; height: 64px; color: var(--primary); }
+  .turno-card p { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .btn {
+    display: inline-block;
+    background: var(--primary); color: #fff;
+    font-family: inherit; font-weight: 600; font-size: 9.5px;
+    border: none; border-radius: 999px;
+    padding: 6px 7px; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.15); }
+
+  .section-title { font-size: 16px; font-weight: 700; margin: 42px 0 14px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 25px;
+  }
+  .tile {
+    background: var(--card);
+    border-radius: 10px;
+    height: 99px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+    font-size: 13px; font-weight: 500;
+    transition: box-shadow .15s;
+  }
+  .tile:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .tile svg { width: 42px; height: 42px; color: var(--primary); stroke-width: 1.6; }
+
+  /* Right column info cards */
+  .side { display: flex; flex-direction: column; gap: 25px; }
+  .info-card {
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 6px;
+    display: flex; align-items: center;
+    padding: 0 10px;
+  }
+  .info-card .illus { width: 117px; flex-shrink: 0; display: flex; justify-content: center; }
+  .info-card.pink { background: var(--pink-card); height: 84px; }
+  .info-card h3 { font-size: 13px; font-weight: 700; }
+</style>
 </head>
-
 <body>
-    <div id="header">
-        <div id="three-bars-btn">
-            <svg id="three-bars" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                <path fill-rule="evenodd"
-                    d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
-                </path>
-            </svg>
-        </div>
-        <h1 id="title">
-            <font style="color: black; font-weight: bolder;">mi</font>Argentina
-        </h1>
-    </div>
 
-    <div id="content">
-        <div id="grid-container">
-            <div class="grid-item" onclick="window.location.href = 'dni.html'" id="btn-1">
-                <div class="grid-item-content">
-                    <img class="grid-item-icon" src="res/misdocumentos_logo.png">
-                    <a class="grid-item-text">Mis documentos</a>
-                </div>
-            </div>
-            
-            <div class="grid-item fake-btn" id="btn-2">
-                <div class="grid-item-content">
-                    <img class="grid-item-icon" src="res/misvehiculos_logo.png">
-                    <a class="grid-item-text">Mis vehículos</a>
-                </div>
-            </div>
-            
-            <div class="grid-item fake-btn" id="btn-3">
-                <div class="grid-item-content">
-                    <img class="grid-item-icon" src="res/misalud_logo.png">
-                    <a class="grid-item-text">Mi salud</a>
-                </div>
-            </div>
-            
-            <div class="grid-item fake-btn" id="btn-4">
-                <div class="grid-item-content">
-                    <img class="grid-item-icon" src="res/miscobros_logo.png">
-                    <a class="grid-item-text">Mis cobros</a>
-                </div>
-            </div>
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></symbol>
+    <symbol id="i-doc-id" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><circle cx="8" cy="10.5" r="2"/><path d="M5 16c.5-2 1.6-3 3-3s2.5 1 3 3"/><path d="M13.5 10h5M13.5 13.5h5"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M2.5 16v-3.5l3.5-4.5c.6-.7 1.4-1 2.3-1h9.2c1.2 0 2 .9 2 2V16"/><path d="M2.5 12.5h18"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13" rx="1.5"/><path d="M8.5 7V5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2"/><path d="M2.5 11.5 9.5 13M21.5 11.5 14.5 13"/><rect x="9.5" y="11.5" width="5" height="3.5" rx=".5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5S3 14.8 3 8.8C3 6 5.1 4 7.6 4c1.9 0 3.4 1.1 4.4 2.6C13 5.1 14.5 4 16.4 4 18.9 4 21 6 21 8.8c0 6-9 11.7-9 11.7Z"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="M14 9.3c-.4-.7-1.1-1-2-1-1.2 0-2 .6-2 1.6 0 2.2 4.2 1.2 4.2 3.6 0 1-.9 1.7-2.2 1.7-1 0-1.8-.4-2.2-1.1M12 7v1.3M12 15.2v1.6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2.5H6.5a1.5 1.5 0 0 0-1.5 1.5v16a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V7.5Z"/><path d="M14 2.5v5h5"/><path d="M8.5 12h7M8.5 15h7M8.5 18h7M8.5 9h3"/></symbol>
+    <symbol id="i-turno" viewBox="0 0 24 34"><path d="M3 2v22.5c0 2.3 2.2 3.5 4 4.3L12 32l5-3.2c1.8-.8 4-2 4-4.3V2l-3 2.5c-1.2 3-3.3 4.5-6 4.5S7.2 7.5 6 4.5Z"/><path d="M6.8 15.5c0-1.5.8-2.5 2-2.5s2 1 2 2.5v2.5c0 1.5-.8 2.5-2 2.5s-2-1-2-2.5ZM14 14.3l2-1.3v7.5"/></symbol>
+    <symbol id="i-kids" viewBox="0 0 24 24"><circle cx="7" cy="11" r="2.6"/><path d="M2.5 21c0-3 2-5.2 4.5-5.2s4.5 2.2 4.5 5.2"/><circle cx="16.5" cy="6.5" r="3"/><path d="M11.5 15c.6-3.2 2.6-5 5-5 2.8 0 5 2.4 5 6"/></symbol>
+    <symbol id="i-news" viewBox="0 0 24 24"><rect x="3.5" y="3" width="14" height="18" rx="1"/><path d="M17.5 8h3v11.5a1.5 1.5 0 0 1-3 0"/><rect x="6.5" y="6" width="4" height="4"/><path d="M12.5 6.5h2.5M12.5 9.5h2.5M6.5 13h8.5M6.5 16h8.5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5l1.5-2 4 1.5V18.5a2 2 0 0 1-2 2A16 16 0 0 1 3 5.5a2 2 0 0 1 2-2Z"/><path d="M14 3.5a6.5 6.5 0 0 1 6.5 6.5M14 7a3 3 0 0 1 3 3"/></symbol>
+    <symbol id="i-tina" viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="8.5"/><path d="M3.8 10.5C5 7 8.5 5 12 5s7 2 8.2 5.5c-2.5-.8-5-2.4-6-4-1.6 2.3-5.5 3.7-10.4 4Z" fill="currentColor"/><circle cx="9" cy="13.5" r=".6" fill="currentColor"/><circle cx="15" cy="13.5" r=".6" fill="currentColor"/><path d="M9.5 16.5c1.4 1.2 3.6 1.2 5 0"/></symbol>
+  </defs>
+</svg>
 
-            <div class="grid-item fake-btn" id="btn-5">
-                <div class="grid-item-content">
-                    <img class="grid-item-icon" src="res/misturnos_logo.png">
-                    <a class="grid-item-text">Mis turnos</a>
-                </div>
-            </div>
-            
-            <div class="grid-item fake-btn" id="btn-6">
-                <div class="grid-item-content">
-                    <img class="grid-item-icon" src="res/mistramites_logo.png">
-                    <a class="grid-item-text">Mis trámites</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<aside class="sidebar">
+  <nav>
+    <ul>
+      <li><a href="#" class="active"><svg class="icon"><use href="#i-home"/></svg><span>Inicio</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-doc-id"/></svg><span>Documentos</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-car"/></svg><span>Vehículos</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-briefcase"/></svg><span>Trabajo</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-heart"/></svg><span>Salud</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-money"/></svg><span>Cobros</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-file"/></svg><span>Trámites</span></a></li>
+      <li><a href="#"><svg class="icon" viewBox="0 0 24 34"><use href="#i-turno"/></svg><span>Turnos</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-kids"/></svg><span>Hijos</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-news"/></svg><span>Novedades</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-phone"/></svg><span>Teléfonos</span></a></li>
+      <li><a href="#"><svg class="icon"><use href="#i-tina"/></svg><span>Tina</span></a></li>
+    </ul>
+  </nav>
+</aside>
 
-    <div id="footer">
-        <div class="footer-item active">
-            <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.156 1.835a.25.25 0 00-.312 0l-5.25 4.2a.25.25 0 00-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v5.25h2.75a.25.25 0 00.25-.25V6.23a.25.25 0 00-.094-.195l-5.25-4.2zM6.906.664a1.75 1.75 0 012.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0113.25 15h-3.5a.75.75 0 01-.75-.75V9H7v5.25a.75.75 0 01-.75.75h-3.5A1.75 1.75 0 011 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2h-.001z"></path></svg>            
-            <a class="footer-text">INICIO</a>
-        </div>
-        <div class="footer-item">
-            <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 8.25a.75.75 0 01.75-.75h4a.75.75 0 010 1.5h-4A.75.75 0 015 8.25zM4 10.5A.75.75 0 004 12h4a.75.75 0 000-1.5H4z"></path><path fill-rule="evenodd" d="M13-.005H3a3 3 0 00-3 3c0 .676.224 1.254.603 1.722.526.65 1.331.783 1.907.783h1.177c-.364.662-.814 1.339-1.287 2.048-.205.309-.414.624-.623.946C.891 9.865 0 11.418 0 13a3 3 0 003 3h10a3 3 0 001.667-5.494.75.75 0 00-.834 1.246A1.5 1.5 0 1111.5 13c0-.642.225-1.347.623-2.136.397-.787.933-1.593 1.501-2.446l.011-.017c.554-.83 1.139-1.709 1.582-2.588.445-.885.783-1.836.783-2.818 0-1.672-1.346-3-3-3zm-10 1.5a1.5 1.5 0 00-1.5 1.5c0 .321.1.569.27.778.097.12.325.227.74.227h7.674A2.737 2.737 0 0110 2.995c0-.546.146-1.059.401-1.5H3zm10 0c.831 0 1.5.662 1.5 1.5 0 .646-.225 1.353-.623 2.143-.398.79-.933 1.595-1.501 2.448l-.017.026c-.552.828-1.134 1.702-1.575 2.576C10.338 11.072 10 12.021 10 13c0 .546.146 1.059.401 1.5H3A1.5 1.5 0 011.5 13c0-1.084.63-2.289 1.537-3.692.177-.274.366-.556.558-.845.632-.948 1.306-1.96 1.773-2.963h6.382a.75.75 0 00.417-1.373c-.444-.298-.667-.656-.667-1.132a1.5 1.5 0 011.5-1.5z"></path></svg>
-            <a class="footer-text">NOVEDADES</a>
-        </div>
-        <div class="footer-item">
-            <svg class="footer-icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" stroke="none"><path d="M63 616 c-97 -82 -76 -238 52 -397 167 -206 398 -278 501 -156 35 42 28 87 -23 140 -71 74 -123 79 -186 19 l-28 -26 -91 92 -92 91 26 28 c60 63 55 115 -19 186 -53 51 -98 58 -140 23z"/><path d="M310 632 c0 -6 19 -13 42 -17 136 -23 240 -127 263 -263 4 -23 11 -42 17 -42 16 0 1 76 -26 135 -33 73 -79 120 -149 155 -67 32 -147 50 -147 32z"/><path d="M310 541 c0 -5 17 -12 37 -16 53 -10 84 -28 126 -74 31 -35 57 -92 57 -128 0 -7 5 -13 10 -13 13 0 13 24 -2 74 -16 55 -99 138 -154 154 -49 14 -74 15 -74 3z"/><path d="M310 453 c0 -6 14 -13 31 -17 39 -7 88 -56 95 -95 7 -32 24 -43 24 -15 0 29 -32 84 -60 104 -33 23 -90 37 -90 23z"/></g></svg>
-            <a class="footer-text">TELÉFONOS</a>
-        </div>
-    </div>
+<main>
+  <header class="greeting">
+    <h1>¡Hola Pablo!</h1>
+    <p>Gestioná trámites, sacá turnos, accedé a tus credenciales y recibí información personalizada.</p>
+  </header>
 
-    <script src="scripts/unlock.js"></script>
+  <div class="layout">
+    <!-- Left column -->
+    <section>
+      <div class="turno-card">
+        <svg class="icon big-icon" viewBox="0 0 24 34" style="stroke-width:2.2"><use href="#i-turno"/></svg>
+        <div>
+          <p>No tenés turnos programados</p>
+          <button class="btn">Sacar turno</button>
+        </div>
+      </div>
+
+      <h2 class="section-title">¿Qué necesitás hoy?</h2>
+      <div class="grid">
+        <a href="#" class="tile"><svg class="icon"><use href="#i-doc-id"/></svg>Documentos</a>
+        <a href="#" class="tile"><svg class="icon"><use href="#i-car"/></svg>Vehículos</a>
+        <a href="#" class="tile"><svg class="icon"><use href="#i-briefcase"/></svg>Trabajo</a>
+        <a href="#" class="tile"><svg class="icon"><use href="#i-heart"/></svg>Salud</a>
+        <a href="#" class="tile"><svg class="icon"><use href="#i-money"/></svg>Cobros</a>
+        <a href="#" class="tile"><svg class="icon"><use href="#i-file"/></svg>Trámites</a>
+        <a href="#" class="tile"><svg class="icon" viewBox="0 0 24 34"><use href="#i-turno"/></svg>Turnos</a>
+        <a href="#" class="tile"><svg class="icon"><use href="#i-kids"/></svg>Hijos</a>
+      </div>
+    </section>
+
+    <!-- Right column -->
+    <aside class="side">
+      <div class="info-card pink">
+        <div class="illus">
+          <svg width="80" height="70" viewBox="0 0 80 70">
+            <path d="M20 6c16-8 40-4 48 14s0 42-20 46S2 62 2 42 6 13 20 6Z" fill="#dcb4ba" opacity=".6"/>
+            <circle cx="40" cy="36" r="27" fill="#fff" stroke="#2b2b4a" stroke-width="1.4"/>
+            <path d="M40 9a27 27 0 0 1 18 47" fill="none" stroke="#5ab0e6" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="40" cy="30" r="9" fill="#dcecf8" stroke="#2b2b4a" stroke-width="1.4"/>
+            <path d="M23 56c3-9 9-13 17-13s14 4 17 13" fill="#dcecf8" stroke="#2b2b4a" stroke-width="1.4"/>
+            <path d="M8 13l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5Z" fill="#fff"/>
+            <circle cx="70" cy="7" r="2" fill="none" stroke="#fff" stroke-width="1"/>
+            <circle cx="12" cy="56" r="2" fill="none" stroke="#fff" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3>Mantené tu perfil actualizado</h3>
+      </div>
+    </aside>
+  </div>
+</main>
+
 </body>
-
 </html>
