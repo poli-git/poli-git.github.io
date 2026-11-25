@@ -2,122 +2,124 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Inicio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #3a38bd;
-    --text: #2b2b2b;
-    --bg: #efefef;
-    --sidebar-bg: #f7f7f7;
-    --card: #ffffff;
-    --border: #d9d9d9;
-    --pink-card: #e8cbcf;
+    --primary: #3a2fc1;
+    --text: #1f1f1f;
+    --muted: #5f5f5f;
+    --bg: #ffffff;
+    --green: #cdebdc;
+    --pink: #ecc9cd;
+    --nav-h: 64px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
   body {
     font-family: "Encode Sans", system-ui, sans-serif;
     color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
   }
   svg.icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ---------- Sidebar ---------- */
-  .sidebar {
-    width: 205px;
-    flex-shrink: 0;
-    background: var(--sidebar-bg);
-    border-right: 1px solid #e2e2e2;
-    padding: 14px 12px;
-  }
-  .sidebar nav ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-  .sidebar a {
-    display: flex; align-items: center; gap: 12px;
-    padding: 8px 15px;
-    border-radius: 999px;
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 13px;
-    height: 32px;
-  }
-  .sidebar a span { color: #232349; }
-  .sidebar a svg { width: 18px; height: 18px; flex-shrink: 0; }
-  .sidebar a:hover { background: #e9e9f7; }
-  .sidebar a.active { background: var(--primary); color: #fff; }
-  .sidebar a.active span { color: #fff; }
-
-  /* ---------- Main ---------- */
-  main { flex: 1; padding: 22px 30px 40px; }
-  .greeting { text-align: center; margin-bottom: 26px; }
-  .greeting h1 { font-size: 26px; font-weight: 700; margin-bottom: 26px; }
-  .greeting p { font-size: 12.5px; font-weight: 500; }
-
-  .layout {
-    display: grid;
-    grid-template-columns: minmax(0, 434px) minmax(0, 434px);
-    gap: 26px;
-    justify-content: center;
-    margin-left: 160px; /* matches the off-center layout in the screenshot */
-  }
-  @media (max-width: 1150px) { .layout { margin-left: 0; } }
-  @media (max-width: 900px)  { .layout { grid-template-columns: 1fr; } }
-
-  /* Turnos card */
+  /* ---------- Turnos card ---------- */
   .turno-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    height: 96px;
-    display: flex; align-items: center; gap: 36px;
-    padding: 0 25px;
+    margin: 12px 20px 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.18);
+    padding: 16px 20px 20px 26px;
+    display: flex; align-items: center; gap: 28px;
   }
-  .turno-card .big-icon { width: 42px; height: 64px; color: var(--primary); }
-  .turno-card p { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .turno-card .big-icon { width: 42px; height: 68px; color: var(--primary); stroke-width: 2.2; flex-shrink: 0; }
+  .turno-card p {
+    font-family: Roboto, sans-serif; font-size: 17px; font-weight: 400;
+    color: #2a2a2a; margin-bottom: 14px; letter-spacing: .1px;
+  }
   .btn {
-    display: inline-block;
+    display: inline-block; width: 120px; height: 29px;
     background: var(--primary); color: #fff;
-    font-family: inherit; font-weight: 600; font-size: 9.5px;
-    border: none; border-radius: 999px;
-    padding: 6px 7px; cursor: pointer;
+    font-family: inherit; font-weight: 700; font-size: 12px;
+    border: none; border-radius: 999px; cursor: pointer;
   }
-  .btn:hover { filter: brightness(1.15); }
 
-  .section-title { font-size: 16px; font-weight: 700; margin: 42px 0 14px; }
+  /* ---------- Credentials banner ---------- */
+  .banner {
+    margin: 22px 16px 0;
+    background: var(--green);
+    border-radius: 14px;
+    height: 110px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px 0 30px;
+  }
+  .banner h2 { font-size: 18px; font-weight: 700; line-height: 1.15; }
 
+  /* ---------- Quick access ---------- */
+  .section-title { font-size: 17px; font-weight: 700; margin: 30px 16px 26px; }
   .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px 25px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px 10px; padding: 0 16px;
   }
   .tile {
-    background: var(--card);
-    border-radius: 10px;
-    height: 99px;
+    height: 83px; background: #fff; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
     text-decoration: none; color: var(--text);
-    font-size: 13px; font-weight: 500;
-    transition: box-shadow .15s;
+    font-size: 11px; font-weight: 600;
   }
-  .tile:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-  .tile svg { width: 42px; height: 42px; color: var(--primary); stroke-width: 1.6; }
+  .tile svg { width: 37px; height: 37px; color: var(--primary); stroke-width: 1.6; }
 
-  /* Right column info cards */
-  .side { display: flex; flex-direction: column; gap: 25px; }
-  .info-card {
-    border: 1px solid rgba(0,0,0,.08);
-    border-radius: 6px;
-    display: flex; align-items: center;
-    padding: 0 10px;
+  /* ---------- Carousel ---------- */
+  .carousel {
+    margin-top: 40px;
+    display: flex; gap: 16px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: 0 calc((100% - 330px) / 2);
+    scrollbar-width: none;
   }
-  .info-card .illus { width: 117px; flex-shrink: 0; display: flex; justify-content: center; }
-  .info-card.pink { background: var(--pink-card); height: 84px; }
-  .info-card h3 { font-size: 13px; font-weight: 700; }
+  .carousel::-webkit-scrollbar { display: none; }
+  .slide {
+    flex: 0 0 330px; height: 110px;
+    border-radius: 14px; scroll-snap-align: center;
+    display: flex; align-items: center; gap: 16px; padding: 0 16px;
+  }
+  .slide.pink { background: var(--pink); }
+  .slide.blue { background: #b3cde6; }
+  .slide.gray { background: #d6d6d6; }
+  .slide h3 { font-size: 16.5px; font-weight: 700; margin-bottom: 6px; }
+  .slide p { font-family: Roboto, sans-serif; font-size: 13px; line-height: 1.3; color: #333; }
+
+  /* ---------- Bottom nav ---------- */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    height: calc(var(--nav-h) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 10;
+    background: #fff; box-shadow: 0 -1px 3px rgba(0,0,0,.06);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .bottom-nav a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    text-decoration: none; color: var(--muted);
+    font-family: Roboto, sans-serif; font-size: 12px; letter-spacing: .4px;
+  }
+  .bottom-nav a svg { width: 24px; height: 24px; }
+  .bottom-nav a.active { color: var(--primary); font-family: "Encode Sans", sans-serif; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -125,7 +127,6 @@
 <!-- Icon sprite -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
-    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></symbol>
     <symbol id="i-doc-id" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><circle cx="8" cy="10.5" r="2"/><path d="M5 16c.5-2 1.6-3 3-3s2.5 1 3 3"/><path d="M13.5 10h5M13.5 13.5h5"/></symbol>
     <symbol id="i-car" viewBox="0 0 24 24"><path d="M2.5 16v-3.5l3.5-4.5c.6-.7 1.4-1 2.3-1h9.2c1.2 0 2 .9 2 2V16"/><path d="M2.5 12.5h18"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6"/></symbol>
     <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13" rx="1.5"/><path d="M8.5 7V5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2"/><path d="M2.5 11.5 9.5 13M21.5 11.5 14.5 13"/><rect x="9.5" y="11.5" width="5" height="3.5" rx=".5"/></symbol>
@@ -133,82 +134,107 @@
     <symbol id="i-money" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="M14 9.3c-.4-.7-1.1-1-2-1-1.2 0-2 .6-2 1.6 0 2.2 4.2 1.2 4.2 3.6 0 1-.9 1.7-2.2 1.7-1 0-1.8-.4-2.2-1.1M12 7v1.3M12 15.2v1.6"/></symbol>
     <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2.5H6.5a1.5 1.5 0 0 0-1.5 1.5v16a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 20V7.5Z"/><path d="M14 2.5v5h5"/><path d="M8.5 12h7M8.5 15h7M8.5 18h7M8.5 9h3"/></symbol>
     <symbol id="i-turno" viewBox="0 0 24 34"><path d="M3 2v22.5c0 2.3 2.2 3.5 4 4.3L12 32l5-3.2c1.8-.8 4-2 4-4.3V2l-3 2.5c-1.2 3-3.3 4.5-6 4.5S7.2 7.5 6 4.5Z"/><path d="M6.8 15.5c0-1.5.8-2.5 2-2.5s2 1 2 2.5v2.5c0 1.5-.8 2.5-2 2.5s-2-1-2-2.5ZM14 14.3l2-1.3v7.5"/></symbol>
+    <symbol id="i-turno-big" viewBox="0 0 24 34"><path d="M3 2v22.5c0 2.3 2.2 3.5 4 4.3L12 32l5-3.2c1.8-.8 4-2 4-4.3V2l-3 2.5c-1.2 3-3.3 4.5-6 4.5S7.2 7.5 6 4.5Z"/><path d="M5.5 13h13M5.5 21.5h13"/><path d="M6 17.3c0-1.3.6-2 1.5-2s1.5.7 1.5 2-.6 2-1.5 2-1.5-.7-1.5-2ZM10.5 17.3c0-1.3.6-2 1.5-2s1.5.7 1.5 2-.6 2-1.5 2-1.5-.7-1.5-2ZM15.5 16l1.5-.8v4"/></symbol>
     <symbol id="i-kids" viewBox="0 0 24 24"><circle cx="7" cy="11" r="2.6"/><path d="M2.5 21c0-3 2-5.2 4.5-5.2s4.5 2.2 4.5 5.2"/><circle cx="16.5" cy="6.5" r="3"/><path d="M11.5 15c.6-3.2 2.6-5 5-5 2.8 0 5 2.4 5 6"/></symbol>
-    <symbol id="i-news" viewBox="0 0 24 24"><rect x="3.5" y="3" width="14" height="18" rx="1"/><path d="M17.5 8h3v11.5a1.5 1.5 0 0 1-3 0"/><rect x="6.5" y="6" width="4" height="4"/><path d="M12.5 6.5h2.5M12.5 9.5h2.5M6.5 13h8.5M6.5 16h8.5"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.5 4-2 1.5a11 11 0 0 0 6.5 6.5l1.5-2 4 1.5V18.5a2 2 0 0 1-2 2A16 16 0 0 1 3 5.5a2 2 0 0 1 2-2Z"/><path d="M14 3.5a6.5 6.5 0 0 1 6.5 6.5M14 7a3 3 0 0 1 3 3"/></symbol>
-    <symbol id="i-tina" viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="8.5"/><path d="M3.8 10.5C5 7 8.5 5 12 5s7 2 8.2 5.5c-2.5-.8-5-2.4-6-4-1.6 2.3-5.5 3.7-10.4 4Z" fill="currentColor"/><circle cx="9" cy="13.5" r=".6" fill="currentColor"/><circle cx="15" cy="13.5" r=".6" fill="currentColor"/><path d="M9.5 16.5c1.4 1.2 3.6 1.2 5 0"/></symbol>
   </defs>
 </svg>
 
-<aside class="sidebar">
-  <nav>
-    <ul>
-      <li><a href="#" class="active"><svg class="icon"><use href="#i-home"/></svg><span>Inicio</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-doc-id"/></svg><span>Documentos</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-car"/></svg><span>Vehículos</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-briefcase"/></svg><span>Trabajo</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-heart"/></svg><span>Salud</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-money"/></svg><span>Cobros</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-file"/></svg><span>Trámites</span></a></li>
-      <li><a href="#"><svg class="icon" viewBox="0 0 24 34"><use href="#i-turno"/></svg><span>Turnos</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-kids"/></svg><span>Hijos</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-news"/></svg><span>Novedades</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-phone"/></svg><span>Teléfonos</span></a></li>
-      <li><a href="#"><svg class="icon"><use href="#i-tina"/></svg><span>Tina</span></a></li>
-    </ul>
-  </nav>
-</aside>
-
 <main>
-  <header class="greeting">
-    <h1>¡Hola Pablo!</h1>
-    <p>Gestioná trámites, sacá turnos, accedé a tus credenciales y recibí información personalizada.</p>
-  </header>
+  <div class="turno-card">
+    <svg class="icon big-icon" viewBox="0 0 24 34"><use href="#i-turno-big"/></svg>
+    <div>
+      <p>No tenés turnos programados.</p>
+      <button class="btn">Sacá turno</button>
+    </div>
+  </div>
 
-  <div class="layout">
-    <!-- Left column -->
-    <section>
-      <div class="turno-card">
-        <svg class="icon big-icon" viewBox="0 0 24 34" style="stroke-width:2.2"><use href="#i-turno"/></svg>
-        <div>
-          <p>No tenés turnos programados</p>
-          <button class="btn">Sacar turno</button>
-        </div>
-      </div>
+  <div class="banner">
+    <h2>¡Todas tus credenciales<br>están al día!</h2>
+    <svg width="56" height="52" viewBox="0 0 56 52" aria-hidden="true">
+      <rect x="2" y="13" width="52" height="37" rx="3" fill="#fff" stroke="#24304a" stroke-width="1.3"/>
+      <rect x="6" y="22" width="18" height="18" rx="1.5" fill="#cdebdc"/>
+      <circle cx="15" cy="28" r="3.6" fill="none" stroke="#24304a" stroke-width="1.3"/>
+      <path d="M9 39c.8-4 3.2-6 6-6s5.2 2 6 6" fill="none" stroke="#24304a" stroke-width="1.3"/>
+      <path d="M29 27h20M29 32h20M29 37h20" stroke="#24304a" stroke-width="1.3"/>
+      <circle cx="38" cy="11" r="10" fill="#1fb54a" stroke="#24304a" stroke-width="1.3"/>
+      <path d="M38 21l-3 3h6Z" fill="#1fb54a"/>
+      <path d="M33.5 11l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 
-      <h2 class="section-title">¿Qué necesitás hoy?</h2>
-      <div class="grid">
-        <a href="#" class="tile"><svg class="icon"><use href="#i-doc-id"/></svg>Documentos</a>
-        <a href="#" class="tile"><svg class="icon"><use href="#i-car"/></svg>Vehículos</a>
-        <a href="#" class="tile"><svg class="icon"><use href="#i-briefcase"/></svg>Trabajo</a>
-        <a href="#" class="tile"><svg class="icon"><use href="#i-heart"/></svg>Salud</a>
-        <a href="#" class="tile"><svg class="icon"><use href="#i-money"/></svg>Cobros</a>
-        <a href="#" class="tile"><svg class="icon"><use href="#i-file"/></svg>Trámites</a>
-        <a href="#" class="tile"><svg class="icon" viewBox="0 0 24 34"><use href="#i-turno"/></svg>Turnos</a>
-        <a href="#" class="tile"><svg class="icon"><use href="#i-kids"/></svg>Hijos</a>
-      </div>
-    </section>
+  <h2 class="section-title">¿Qué necesitás hoy?</h2>
+  <div class="grid">
+    <a href="#" class="tile"><svg class="icon"><use href="#i-doc-id"/></svg>Documentos</a>
+    <a href="#" class="tile"><svg class="icon"><use href="#i-car"/></svg>Vehículos</a>
+    <a href="#" class="tile"><svg class="icon"><use href="#i-briefcase"/></svg>Trabajo</a>
+    <a href="#" class="tile"><svg class="icon"><use href="#i-heart"/></svg>Salud</a>
+    <a href="#" class="tile"><svg class="icon"><use href="#i-money"/></svg>Cobros</a>
+    <a href="#" class="tile"><svg class="icon"><use href="#i-file"/></svg>Trámites</a>
+    <a href="#" class="tile"><svg class="icon" viewBox="0 0 24 34"><use href="#i-turno"/></svg>Turnos</a>
+    <a href="#" class="tile"><svg class="icon"><use href="#i-kids"/></svg>Hijos</a>
+  </div>
 
-    <!-- Right column -->
-    <aside class="side">
-      <div class="info-card pink">
-        <div class="illus">
-          <svg width="80" height="70" viewBox="0 0 80 70">
-            <path d="M20 6c16-8 40-4 48 14s0 42-20 46S2 62 2 42 6 13 20 6Z" fill="#dcb4ba" opacity=".6"/>
-            <circle cx="40" cy="36" r="27" fill="#fff" stroke="#2b2b4a" stroke-width="1.4"/>
-            <path d="M40 9a27 27 0 0 1 18 47" fill="none" stroke="#5ab0e6" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="40" cy="30" r="9" fill="#dcecf8" stroke="#2b2b4a" stroke-width="1.4"/>
-            <path d="M23 56c3-9 9-13 17-13s14 4 17 13" fill="#dcecf8" stroke="#2b2b4a" stroke-width="1.4"/>
-            <path d="M8 13l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5Z" fill="#fff"/>
-            <circle cx="70" cy="7" r="2" fill="none" stroke="#fff" stroke-width="1"/>
-            <circle cx="12" cy="56" r="2" fill="none" stroke="#fff" stroke-width="1"/>
-          </svg>
-        </div>
-        <h3>Mantené tu perfil actualizado</h3>
+  <div class="carousel" id="carousel">
+    <div class="slide blue"></div>
+    <div class="slide pink">
+      <svg width="82" height="70" viewBox="0 0 80 70" style="flex-shrink:0" aria-hidden="true">
+        <path d="M20 10c14-10 36-6 44 10s2 40-18 44S0 58 2 40 8 18 20 10Z" fill="#dcb0b6" opacity=".7"/>
+        <circle cx="40" cy="38" r="26" fill="#fff" stroke="#2b2b4a" stroke-width="1.3"/>
+        <path d="M40 12a26 26 0 0 1 17 46" fill="none" stroke="#2bb0ea" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="40" cy="32" r="8.5" fill="#fff" stroke="#2b2b4a" stroke-width="1.3"/>
+        <path d="M24 57c3-8 9-12 16-12s13 4 16 12" fill="#cfe7f7" stroke="#2b2b4a" stroke-width="1.3"/>
+        <path d="M10 17l1.4 2.8 2.8 1.4-2.8 1.4L10 25.4l-1.4-2.8-2.8-1.4 2.8-1.4Z" fill="#fff"/>
+        <circle cx="66" cy="10" r="2" fill="none" stroke="#fff" stroke-width="1"/>
+        <circle cx="13" cy="60" r="2" fill="none" stroke="#fff" stroke-width="1"/>
+      </svg>
+      <div>
+        <h3>Completá tu perfil</h3>
+        <p>Mantené todos tus datos actualizados</p>
       </div>
-    </aside>
+    </div>
+    <div class="slide gray"></div>
   </div>
 </main>
 
+<nav class="bottom-nav">
+  <a href="#" class="active">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3 2.5 11.3l1.3 1.5L5 11.8V21h5v-5.5h4V21h5v-9.2l1.2 1 1.3-1.5Z"/></svg>
+    Inicio
+  </a>
+  <a href="#">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h14v18H4a1 1 0 0 1-1-1Zm15 5h3v12a1 1 0 0 1-1 1h-2Z"/><g fill="#fff"><rect x="5.5" y="6" width="4.5" height="4.5"/><rect x="11.5" y="6.5" width="4" height="1.5"/><rect x="11.5" y="9" width="4" height="1.5"/><rect x="5.5" y="13" width="10" height="1.5"/><rect x="5.5" y="16" width="10" height="1.5"/></g></svg>
+    Novedades
+  </a>
+  <a href="#">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h3.5l1.8 4.5-2.3 1.7a11 11 0 0 0 6.8 6.8l1.7-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/><path d="M14 3a7 7 0 0 1 7 7M14 6.5a3.5 3.5 0 0 1 3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    Teléfonos
+  </a>
+  <a href="#">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="9.5" fill="currentColor"/><path d="M5.5 13.5c0-1 .5-2.2 1.3-3 2.8-.3 5.5-1.6 7-3.3.9 1.7 2.8 3 4.8 3.5.6.8.9 1.8.9 2.8a7.3 7.3 0 0 1-14 0Z" fill="#fff"/><circle cx="9.3" cy="13.8" r=".9" fill="currentColor"/><circle cx="14.7" cy="13.8" r=".9" fill="currentColor"/><path d="M10 16.6c1.2.9 2.8.9 4 0" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    Tina
+  </a>
+</nav>
+
+<script>
+  // Start the carousel centered on the pink "Completá tu perfil" slide
+  const c = document.getElementById('carousel');
+  const s = c.children[1];
+  function centerSlide() {
+    const cr = c.getBoundingClientRect(), sr = s.getBoundingClientRect();
+    c.scrollLeft += (sr.left - cr.left) - (cr.width - sr.width) / 2;
+  }
+  centerSlide();
+  window.addEventListener('load', centerSlide);
+  window.addEventListener('resize', centerSlide);
+
+  // Bottom navigation: highlight the tapped tab
+  document.querySelectorAll('.bottom-nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector('.bottom-nav a.active')?.classList.remove('active');
+      a.classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
