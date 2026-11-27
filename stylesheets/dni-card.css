@@ -140,7 +140,6 @@
     top: calc(49px * var(--dni-size-multiplier));
     left: calc(10px * var(--dni-size-multiplier));
     object-fit: cover;
-    filter: blur(0.2px);
 }
 
 #dni-firma {
@@ -160,7 +159,7 @@
     background-color: white;
     bottom: 15px;
     right: 15.5px;
-    filter: blur(0.3px)
+    
 }
 
 #dni-number {
@@ -168,7 +167,6 @@
     position: absolute;
     left: calc(12.5px * var(--dni-size-multiplier));
     bottom: calc(20px * var(--dni-size-multiplier));
-    filter: blur(0.45px);
     font-weight: 600;
     letter-spacing: -0.5px;
 }
@@ -184,7 +182,6 @@
     position: absolute;
     left: calc(15px * var(--dni-size-multiplier));
     top: calc(11px * var(--dni-size-multiplier));
-    filter: blur(0.35px);
     letter-spacing: -0.65px;
 }
 
@@ -196,7 +193,6 @@
     left: 0;
     right: 0;
     bottom: calc(11px * var(--dni-size-multiplier));
-    filter: blur(0.35px);
     line-height: 25px;
     display: flex;
     flex-direction: column;
