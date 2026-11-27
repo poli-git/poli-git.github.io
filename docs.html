@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3830c2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Documentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --primary: #3a2fc1; --text: #1f1f1f; --muted: #5f5f5f; --nav-h: 64px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #f4f4f6; }
+  body {
+    font-family: "Encode Sans", system-ui, sans-serif; color: var(--text);
+    max-width: 480px; margin: 0 auto; min-height: 100dvh;
+    padding-bottom: calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));
+    -webkit-tap-highlight-color: transparent;
+  }
+  svg.icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Header ---------- */
+  .app-header {
+    background: #3830c2; color: #fff;
+    padding: env(safe-area-inset-top) 18px 0;
+    height: calc(64px + env(safe-area-inset-top));
+    display: flex; align-items: center; gap: 18px;
+  }
+  .app-header .back { color: #fff; display: flex; }
+  .app-header .title { font-size: 20px; font-weight: 700; flex: 1; }
+  .app-header .refresh { color: #fff; display: flex; }
+  .icon-btn { background: none; border: none; cursor: pointer; padding: 4px; }
+
+  /* ---------- Document list ---------- */
+  .list { padding: 20px 16px 0; display: flex; flex-direction: column; gap: 18px; }
+  .doc {
+    background: #fff; border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12);
+    overflow: hidden;
+  }
+  .doc-head {
+    display: flex; align-items: center; gap: 18px;
+    padding: 18px 18px; cursor: pointer; width: 100%;
+    background: none; border: none; text-align: left; font-family: inherit;
+  }
+  .doc-head .thumb { color: var(--primary); flex-shrink: 0; padding-right: 18px; border-right: 1px solid #e3e3e3; }
+  .doc-head .thumb svg { width: 52px; height: 40px; display: block; }
+  .doc-head .name { flex: 1; font-size: 19px; font-weight: 700; line-height: 1.2; }
+  .doc-head .chev { color: #8a8a8a; transition: transform .25s; flex-shrink: 0; }
+  .doc.open .chev { transform: rotate(180deg); }
+
+  .doc-body {
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+  }
+  .doc.open .doc-body { max-height: 900px; }
+  .doc-body-inner .placeholder {
+    margin: 16px 18px; border: 1.5px dashed #c9c9c9; border-radius: 8px;
+    height: 150px; display: flex; align-items: center; justify-content: center;
+    color: #9a9a9a; font-family: "Encode Sans", sans-serif; font-weight: 600; font-size: 13px;
+  }
+  /* expanded DNI sections, divided by thin lines */
+  .sec { padding: 20px 18px; border-top: 1px solid #ececec; }
+  .btn-primary {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 56px; border-radius: 999px;
+    background: var(--primary); color: #fff; border: none;
+    font-family: inherit; font-size: 18px; font-weight: 700; cursor: pointer; text-decoration: none;
+  }
+  .btn-outline {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 54px; border-radius: 999px;
+    background: #fff; color: var(--primary); border: 1.6px solid var(--primary);
+    font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer; text-decoration: none;
+  }
+  .supplier { font-family: Roboto, sans-serif; }
+  .supplier .label { font-size: 16px; color: #2a2a2a; }
+  .supplier .org { font-size: 17px; font-weight: 700; color: #6aa6dc; margin-top: 4px; }
+  .reminder { font-family: Roboto, sans-serif; font-size: 16px; color: #2a2a2a; line-height: 1.4; margin-bottom: 20px; }
+  .info-row { display: flex; align-items: center; gap: 16px; color: var(--primary); }
+  .info-row svg { width: 40px; height: 40px; flex-shrink: 0; }
+  .info-row span { font-size: 15px; font-weight: 600; font-family: Roboto, sans-serif; }
+
+  /* ---------- Bottom nav ---------- */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    height: calc(var(--nav-h) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom); z-index: 10;
+    background: #fff; box-shadow: 0 -1px 3px rgba(0,0,0,.06);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .bottom-nav a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    text-decoration: none; color: var(--muted);
+    font-family: Roboto, sans-serif; font-size: 12px; letter-spacing: .4px;
+  }
+  .bottom-nav a svg { width: 24px; height: 24px; }
+  .bottom-nav a.active { color: var(--primary); font-family: "Encode Sans", sans-serif; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <a href="dashboard.html" class="back" aria-label="Volver">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+  </a>
+  <span class="title">Documentos</span>
+  <button class="icon-btn refresh" aria-label="Actualizar">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-1.5 5.5"/><path d="M20 5v6h-6"/></svg>
+  </button>
+</header>
+
+<main class="list">
+  <!-- DNI -->
+  <div class="doc" id="doc-dni">
+    <button class="doc-head" onclick="toggle('doc-dni')" aria-expanded="false">
+      <span class="thumb">
+        <svg viewBox="0 0 52 40"><rect x="1" y="1" width="50" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><rect x="8" y="9" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="15" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 24c1-3 3-4 5-4s4 1 5 4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M30 13h14M30 20h14M30 27h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </span>
+      <span class="name">Documento Nacional de Identidad (DNI)</span>
+      <span class="chev"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    </button>
+    <div class="doc-body"><div class="doc-body-inner">
+      <div class="sec">
+        <a href="dni.html" class="btn-primary">Ver DNI digital</a>
+      </div>
+      <div class="sec supplier">
+        <div class="label">Datos suministrados por</div>
+        <div class="org">RENAPER</div>
+      </div>
+      <div class="sec">
+        <p class="reminder">Recordá que podés solicitar el DNI para vos y para tus hijos y tenerlo disponible en la App.</p>
+        <a href="#" class="btn-outline">Solicitar DNI Digital</a>
+      </div>
+      <div class="sec info-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 11v6" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg>
+        <span>Cambié o voy a cambiar el dispositivo</span>
+      </div>
+    </div></div>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <a href="dashboard.html" class="active">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3 2.5 11.3l1.3 1.5L5 11.8V21h5v-5.5h4V21h5v-9.2l1.2 1 1.3-1.5Z"/></svg>
+    Inicio
+  </a>
+  <a href="#">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h14v18H4a1 1 0 0 1-1-1Zm15 5h3v12a1 1 0 0 1-1 1h-2Z"/><g fill="#fff"><rect x="5.5" y="6" width="4.5" height="4.5"/><rect x="11.5" y="6.5" width="4" height="1.5"/><rect x="11.5" y="9" width="4" height="1.5"/><rect x="5.5" y="13" width="10" height="1.5"/><rect x="5.5" y="16" width="10" height="1.5"/></g></svg>
+    Novedades
+  </a>
+  <a href="#">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h3.5l1.8 4.5-2.3 1.7a11 11 0 0 0 6.8 6.8l1.7-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/><path d="M14 3a7 7 0 0 1 7 7M14 6.5a3.5 3.5 0 0 1 3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    Teléfonos
+  </a>
+  <a href="#">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="9.5" fill="currentColor"/><path d="M5.5 13.5c0-1 .5-2.2 1.3-3 2.8-.3 5.5-1.6 7-3.3.9 1.7 2.8 3 4.8 3.5.6.8.9 1.8.9 2.8a7.3 7.3 0 0 1-14 0Z" fill="#fff"/><circle cx="9.3" cy="13.8" r=".9" fill="currentColor"/><circle cx="14.7" cy="13.8" r=".9" fill="currentColor"/><path d="M10 16.6c1.2.9 2.8.9 4 0" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    Tina
+  </a>
+</nav>
+
+<script>
+  function toggle(id){
+    const el = document.getElementById(id);
+    const open = el.classList.toggle('open');
+    el.querySelector('.doc-head').setAttribute('aria-expanded', open);
+  }
+</script>
+</body>
+</html>
